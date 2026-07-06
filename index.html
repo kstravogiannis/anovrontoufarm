@@ -1274,7 +1274,7 @@ function ContactPage() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ display: 'grid', gap: 18 }}>
+              <form action="https://formspree.io/f/xnjkrjkw" method="POST" onSubmit={(e) => { e.preventDefault(); fetch('https://formspree.io/f/xnjkrjkw', { method: 'POST', headers: {'Accept': 'application/json'}, body: new FormData(e.target) }).then(() => setSent(true)); }} style={{ display: 'grid', gap: 18 }}>
                 <label style={{ display: 'grid', gap: 8 }}>
                   <span style={{ fontSize: 13, fontWeight: 500 }}>Όνομα</span>
                   <input className="field" required value={form.name}
