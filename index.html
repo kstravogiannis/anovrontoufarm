@@ -1,0 +1,2205 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>anovrountoufarm · Βιολογικές πατάτες · Άνω Βρόντου Σερρών</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233a2624'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23d9633a'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap&subset=greek,latin" rel="stylesheet">
+  <style>
+    :root {
+      /* Palette 3 — Aubergine + Orange (default) */
+      --paper: #f3e8d3;
+      --paper-2: #ead9bd;
+      --paper-sunk: #e2cfb0;
+      --card: #fbf4e6;
+      --ink: #2a1916;
+      --ink-soft: #6b5048;
+      --stone: #a08879;
+      --stone-light: #d6c3a8;
+      --bg-dark: #3a2624;
+      --bg-dark-2: #2d1d1c;
+      --bg-dark-ink: #f3e8d3;
+      --bg-dark-soft: #c2a98e;
+      --accent: #d9633a;
+      --accent-hover: #c14e26;
+      --accent-soft: #f0b89e;
+      --accent-ink: #5a2316;
+      --leaf: #5a7d3f;
+      --sky: #b6cdd0;
+
+      --font-display: 'Fraunces', 'GFS Didot', Georgia, serif;
+      --font-text: 'Inter', -apple-system, system-ui, sans-serif;
+      --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+      --gutter: 24px;
+      --ease: cubic-bezier(0.2,0.8,0.2,1);
+      --ease-in-out: cubic-bezier(0.4,0,0.2,1);
+      --dur-fast: 160ms;
+      --dur-med: 320ms;
+      --dur-slow: 700ms;
+
+      --shadow-1: 0 1px 2px rgba(42,25,22,0.05);
+      --shadow-2: 0 2px 12px rgba(42,25,22,0.08), 0 1px 2px rgba(42,25,22,0.05);
+      --shadow-3: 0 24px 60px rgba(42,25,22,0.14), 0 8px 20px rgba(42,25,22,0.08);
+
+      --type-scale: 1;
+    }
+    @media (min-width:760px) { :root { --gutter: 40px; } }
+    @media (min-width:1100px) { :root { --gutter: 64px; } }
+
+    /* Palette: coral (was the salmon variant of the packaging) */
+    [data-palette="coral"] {
+      --bg-dark: #e58769;
+      --bg-dark-2: #d76d4d;
+      --bg-dark-ink: #3a2624;
+      --bg-dark-soft: #6a3e2d;
+      --paper: #f8efde;
+      --paper-2: #f0e0c4;
+      --accent: #c14e26;
+      --accent-hover: #a13a16;
+      --accent-soft: #f4cab1;
+    }
+    /* Palette: cream (the warm light variant) */
+    [data-palette="cream"] {
+      --bg-dark: #f3e8d3;
+      --bg-dark-2: #ead9bd;
+      --bg-dark-ink: #2a1916;
+      --bg-dark-soft: #6b5048;
+      --paper: #faf3e2;
+      --paper-2: #f3e8d3;
+      --paper-sunk: #ead9bd;
+      --accent: #d04b22;
+      --accent-hover: #b03b16;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-text);
+      font-size: calc(16px * var(--type-scale));
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 24px;
+      font-family: var(--font-text); font-size: 15px; font-weight: 500; line-height: 1;
+      border: 1px solid transparent; border-radius: 4px;
+      cursor: pointer; text-decoration: none; white-space: nowrap;
+      transition: background var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease);
+    }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn-ink { background: var(--ink); color: var(--paper); }
+    .btn-ink:hover { background: #000; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: inherit; border-color: currentColor; opacity: 0.85; }
+    .btn-outline:hover { opacity: 1; transform: translateY(-1px); }
+    .btn-ghost { background: transparent; padding-left: 0; padding-right: 0; color: inherit; }
+    .btn-ghost .arrow { transition: transform var(--dur-fast) var(--ease); display: inline-block; }
+    .btn-ghost:hover .arrow { transform: translateX(6px); }
+    .btn-whatsapp { background: #25d366; color: #fff; }
+    .btn-whatsapp:hover { background: #1ebe57; transform: translateY(-1px); }
+
+    /* ---------- Reveals ---------- */
+    .reveal { opacity: 0; transform: translateY(20px);
+      transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-stagger > * { opacity: 0; transform: translateY(16px);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+    .reveal-stagger.in > *:nth-child(1) { transition-delay: 60ms; }
+    .reveal-stagger.in > *:nth-child(2) { transition-delay: 140ms; }
+    .reveal-stagger.in > *:nth-child(3) { transition-delay: 220ms; }
+    .reveal-stagger.in > *:nth-child(4) { transition-delay: 300ms; }
+    .reveal-stagger.in > *:nth-child(5) { transition-delay: 380ms; }
+    .reveal-stagger.in > *:nth-child(6) { transition-delay: 460ms; }
+    .reveal-stagger.in > * { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Underline link ---------- */
+    .ul-link { position: relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px;
+      height:1px; background: currentColor; transform: scaleX(0); transform-origin: right;
+      transition: transform 400ms var(--ease); }
+    .ul-link:hover::after, .ul-link.active::after { transform: scaleX(1); transform-origin: left; }
+
+    /* ---------- Selection ---------- */
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* ---------- Marquee ---------- */
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee { display: flex; gap: 56px; animation: marquee 50s linear infinite;
+      white-space: nowrap; width: max-content; }
+    .marquee-wrap { overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+
+    /* ---------- Hero word reveal ---------- */
+    .hero-word { display: inline-block; opacity: 0; transform: translateY(40%);
+      transition: opacity 1100ms var(--ease), transform 1100ms var(--ease); }
+    .hero-word.in { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Photo treatment ---------- */
+    .photo {
+      position: relative; overflow: hidden; border-radius: 16px; background: var(--paper-sunk);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 1200ms var(--ease), filter 1200ms var(--ease);
+      filter: saturate(0.72) contrast(1.08) brightness(0.97) sepia(0.08); }
+    .photo:hover img { transform: scale(1.03); filter: saturate(0.80) contrast(1.06) brightness(0.99) sepia(0.05); }
+    /* Editorial overlay: warm tone + vignette on every photo */
+    .photo::before {
+      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: rgba(74, 44, 26, 0.10);
+      mix-blend-mode: multiply;
+    }
+    .photo::after {
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 40%, transparent 38%, rgba(20,12,8,0.38) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    /* ---------- Mobile nav ---------- */
+    @media (max-width: 760px) {
+      .nav-links { display: none !important; }
+      .nav-mobile-toggle { display: inline-flex !important; }
+    }
+    .nav-mobile-toggle { display: none; }
+
+    /* ---------- Form ---------- */
+    .field {
+      width: 100%; padding: 16px 18px;
+      font-family: var(--font-text); font-size: 15px;
+      color: var(--ink); background: var(--card);
+      border: 1px solid var(--stone-light); border-radius: 4px;
+      outline: none; transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+    }
+    .field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .field::placeholder { color: var(--stone); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+
+  <script src="image-slot.js"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react">
+// ============ primitives.jsx ============
+// Shared primitives — Container, Eyebrow, Reveal, Button, Wordmark, etc.
+const { useState, useEffect, useRef } = React;
+
+// Scroll reveal helper
+function useReveal(threshold = 0.12) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { el.classList.add('in'); io.unobserve(el); }
+      });
+    }, { threshold });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [threshold]);
+  return ref;
+}
+
+const Container = ({ children, narrow, style, className }) => (
+  <div className={className} style={{
+    maxWidth: narrow ? 880 : 1240,
+    margin: '0 auto',
+    padding: '0 var(--gutter)',
+    ...style
+  }}>{children}</div>
+);
+
+const Eyebrow = ({ children, style, color }) => (
+  <div style={{
+    fontFamily: 'var(--font-text)', fontSize: 12, fontWeight: 500,
+    letterSpacing: '0.14em', textTransform: 'uppercase',
+    color: color || 'var(--stone)',
+    display: 'inline-flex', alignItems: 'center', gap: 12,
+    ...style
+  }}>
+    <span style={{ width: 22, height: 1, background: 'currentColor', display: 'inline-block', opacity: 0.6 }} />
+    <span>{children}</span>
+  </div>
+);
+
+const Divider = ({ color, style }) => (
+  <hr style={{ border: 0, borderTop: '1px solid ' + (color || 'var(--stone-light)'), margin: 0, ...style }} />
+);
+
+const Reveal = ({ children, as: Tag = 'div', stagger, style, className = '', ...rest }) => {
+  const r = useReveal();
+  return (
+    <Tag ref={r} className={'reveal' + (stagger ? ' reveal-stagger' : '') + (className ? ' ' + className : '')} style={style} {...rest}>
+      {children}
+    </Tag>
+  );
+};
+
+const SectionTitle = ({ eyebrow, title, lead, align = 'left', color, eyebrowColor, leadColor, style }) => (
+  <Reveal style={{ marginBottom: 56, textAlign: align, ...style }}>
+    {eyebrow && <Eyebrow color={eyebrowColor} style={{ marginBottom: 20 }}>{eyebrow}</Eyebrow>}
+    <h2 style={{
+      fontSize: 'clamp(34px, 5.2vw, 64px)',
+      fontFamily: 'var(--font-display)', fontWeight: 300,
+      letterSpacing: '-0.018em', lineHeight: 1.05,
+      margin: 0, color: color || 'inherit',
+      fontVariationSettings: '"opsz" 144, "wght" 300',
+      textWrap: 'balance', maxWidth: align === 'center' ? '20ch' : '16ch',
+      marginInline: align === 'center' ? 'auto' : undefined
+    }}>{title}</h2>
+    {lead && <p style={{
+      fontSize: 'clamp(17px, 1.5vw, 21px)',
+      color: leadColor || 'var(--ink-soft)',
+      marginTop: 22, marginBottom: 0, lineHeight: 1.55,
+      maxWidth: '54ch',
+      marginInline: align === 'center' ? 'auto' : undefined,
+      textWrap: 'pretty'
+    }}>{lead}</p>}
+  </Reveal>
+);
+
+// Wordmark — Fraunces, lowercase, with a tiny terracotta dot
+const Wordmark = ({ size = 22, color, dotColor, onClick, upper = false }) => {
+  const txt = upper ? 'ANOVROUNTOUFARM' : 'anovrountoufarm';
+  return (
+    <a href="#" onClick={(e) => { e.preventDefault(); onClick && onClick(); }}
+       style={{ position: 'relative', display: 'inline-flex', alignItems: 'baseline', textDecoration: 'none' }}>
+      <span style={{
+        fontFamily: 'var(--font-display)', fontWeight: 300,
+        fontSize: size, letterSpacing: upper ? '0.04em' : '-0.025em',
+        color: color || 'var(--ink)', lineHeight: 1,
+        fontVariationSettings: '"opsz" 144, "wght" 300'
+      }}>{txt}</span>
+      <span style={{
+        marginLeft: 3,
+        width: Math.max(4, size * 0.17),
+        height: Math.max(4, size * 0.17),
+        borderRadius: '50%',
+        background: dotColor || 'var(--accent)',
+        display: 'inline-block',
+        flexShrink: 0,
+        alignSelf: 'center',
+        transform: `translateY(${size * 0.18}px)`
+      }} />
+    </a>
+  );
+};
+
+// CTA WhatsApp/Phone
+const WhatsAppIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.2-.7.2s-.8.9-1 1.1c-.2.2-.4.2-.7.1-2-1-3.3-1.7-4.6-3.9-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.3 3.1c.2.2 2.2 3.4 5.4 4.7.7.3 1.3.5 1.8.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.6.2-1.2.2-1.4 0-.1-.2-.2-.5-.3z M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.5.8 3.1 1.3 4.8 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.6 3.8-8.3 8.5-8.3 4.7 0 8.5 3.7 8.5 8.3s-3.8 8.5-8.5 8.5z"/>
+  </svg>
+);
+
+const PhoneIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+);
+
+const ArrowRight = ({ size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/>
+  </svg>
+);
+
+const ExternalIcon = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M7 7h10v10"/><line x1="7" y1="17" x2="17" y2="7"/>
+  </svg>
+);
+
+// Phone number constants — placeholder, easy to swap
+const CONTACT = {
+  phone: '+30 699 373 4999',
+  phoneHref: 'tel:+306993734999',
+  whatsapp: 'https://wa.me/306993734999',
+  email: 'info@anovrountoufarm.gr',
+  village: 'Άνω Βρόντου, Σερρών 62055',
+  hours: 'Δευ–Σαβ · 09:00–18:00'
+};
+
+Object.assign(window, {
+  useReveal, Container, Eyebrow, Divider, Reveal, SectionTitle,
+  Wordmark, WhatsAppIcon, PhoneIcon, ArrowRight, ExternalIcon, CONTACT
+});
+
+
+// ============ illustrations.jsx ============
+// Custom SVG illustrations inspired by the Άνω Βρόντου packaging
+// Stylised — far blue mountains, green hills, terracotta-roof village
+
+const HeroIllustration = ({ height = 360 }) => (
+  <svg viewBox="0 0 800 360" preserveAspectRatio="xMidYMid slice"
+       style={{ width: '100%', height, display: 'block' }} aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stopColor="var(--bg-dark)" stopOpacity="0"/>
+        <stop offset="100%" stopColor="var(--bg-dark-2)" stopOpacity="0"/>
+      </linearGradient>
+      <linearGradient id="hill-far" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stopColor="#6a8b8a"/>
+        <stop offset="100%" stopColor="#4d6e6b"/>
+      </linearGradient>
+      <linearGradient id="hill-mid" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stopColor="#6a9456"/>
+        <stop offset="100%" stopColor="#42693a"/>
+      </linearGradient>
+      <linearGradient id="hill-near" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stopColor="#85ad62"/>
+        <stop offset="100%" stopColor="#557d44"/>
+      </linearGradient>
+    </defs>
+
+    {/* sky band */}
+    <rect width="800" height="360" fill="url(#sky)"/>
+
+    {/* far mountains — silhouette layer */}
+    <path d="M0 200 L60 150 L110 180 L170 130 L220 165 L280 110 L340 155 L400 120 L460 165 L520 130 L580 175 L640 140 L700 175 L760 145 L800 165 L800 360 L0 360 Z"
+          fill="url(#hill-far)" opacity="0.85"/>
+
+    {/* mid hills */}
+    <path d="M0 250 C 80 215, 160 245, 240 220 S 400 240, 480 215 S 640 245, 800 220 L 800 360 L 0 360 Z"
+          fill="url(#hill-mid)"/>
+
+    {/* near hills */}
+    <path d="M0 290 C 100 265, 200 295, 320 275 S 540 290, 680 275 S 800 285, 800 290 L 800 360 L 0 360 Z"
+          fill="url(#hill-near)"/>
+
+    {/* Cypress trees scattered on the near hill */}
+    {[80, 130, 180, 540, 600, 670, 720].map((x, i) => (
+      <g key={i} transform={`translate(${x} ${275 + (i % 3) * 4})`}>
+        <ellipse cx="0" cy="0" rx="4" ry="22" fill="#3e5e2c"/>
+        <rect x="-1" y="18" width="2" height="6" fill="#3e5e2c"/>
+      </g>
+    ))}
+
+    {/* Village — clustered roofs, tower, church */}
+    <g transform="translate(290 250)">
+      {/* base shadow */}
+      <ellipse cx="100" cy="60" rx="170" ry="14" fill="#2a1916" opacity="0.18"/>
+
+      {/* big stone tower — like the Byzantine tower in the packaging */}
+      <g transform="translate(40 -40)">
+        <rect x="0" y="0" width="22" height="80" fill="#c9805a"/>
+        <rect x="-2" y="0" width="26" height="6" fill="#b56b48"/>
+        <rect x="0" y="0" width="22" height="20" fill="#d6916b"/>
+        <rect x="6" y="10" width="3" height="6" fill="#3a2624"/>
+        <rect x="13" y="10" width="3" height="6" fill="#3a2624"/>
+        <rect x="6" y="30" width="3" height="8" fill="#3a2624"/>
+        <rect x="13" y="30" width="3" height="8" fill="#3a2624"/>
+        <rect x="6" y="52" width="3" height="8" fill="#3a2624"/>
+        <rect x="13" y="52" width="3" height="8" fill="#3a2624"/>
+      </g>
+
+      {/* church with dome */}
+      <g transform="translate(95 -10)">
+        <rect x="0" y="20" width="45" height="40" fill="#e5b894"/>
+        <polygon points="0,20 22.5,4 45,20" fill="#c14e26"/>
+        <rect x="20" y="-2" width="5" height="14" fill="#c14e26"/>
+        <circle cx="22.5" cy="-4" r="2" fill="#c14e26"/>
+        {/* windows */}
+        <rect x="6" y="30" width="6" height="14" fill="#3a2624"/>
+        <rect x="18" y="30" width="6" height="14" fill="#3a2624"/>
+        <rect x="30" y="30" width="6" height="14" fill="#3a2624"/>
+      </g>
+
+      {/* small houses cluster — left */}
+      <g transform="translate(0 20)">
+        <rect x="0" y="10" width="32" height="30" fill="#eecaa6"/>
+        <polygon points="-2,10 16,-2 34,10" fill="#b85a32"/>
+        <rect x="12" y="20" width="6" height="14" fill="#3a2624"/>
+        <rect x="22" y="15" width="6" height="6" fill="#3a2624"/>
+      </g>
+      <g transform="translate(160 30)">
+        <rect x="0" y="10" width="36" height="25" fill="#ddb086"/>
+        <polygon points="-2,10 18,-3 38,10" fill="#a04a26"/>
+        <rect x="14" y="18" width="7" height="16" fill="#3a2624"/>
+      </g>
+      <g transform="translate(210 18)">
+        <rect x="0" y="14" width="28" height="22" fill="#e8c19c"/>
+        <polygon points="-2,14 14,2 30,14" fill="#c46839"/>
+        <rect x="10" y="20" width="6" height="12" fill="#3a2624"/>
+      </g>
+      {/* tiny background houses */}
+      <g transform="translate(245 30)">
+        <rect x="0" y="6" width="18" height="14" fill="#cea282"/>
+        <polygon points="-1,6 9,-2 19,6" fill="#8e3f1f"/>
+      </g>
+    </g>
+
+    {/* foreground grass strokes */}
+    <path d="M0 340 C 200 332, 400 348, 800 335 L 800 360 L 0 360 Z" fill="#456a36"/>
+    <path d="M0 352 C 200 348, 400 358, 800 350 L 800 360 L 0 360 Z" fill="#365526"/>
+  </svg>
+);
+
+// Simple potato motif — used as decoration/icon
+const PotatoMark = ({ size = 64, color = 'var(--accent)' }) => (
+  <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
+    <ellipse cx="32" cy="34" rx="22" ry="18" fill={color} opacity="0.9"/>
+    <ellipse cx="26" cy="30" rx="3" ry="2" fill="#3a2624" opacity="0.35"/>
+    <ellipse cx="40" cy="36" rx="2.5" ry="1.8" fill="#3a2624" opacity="0.35"/>
+    <ellipse cx="34" cy="42" rx="2" ry="1.5" fill="#3a2624" opacity="0.35"/>
+    <ellipse cx="22" cy="28" rx="5" ry="2" fill="#fff" opacity="0.18"/>
+  </svg>
+);
+
+// Small mountain mark — used in nav, labels
+const MountainMark = ({ size = 28, color }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M2 26 L11 12 L17 19 L21 14 L30 26 Z" fill={color || 'currentColor'} opacity="0.9"/>
+  </svg>
+);
+
+// Topographic-style decorative lines (subtle background)
+const TopoLines = ({ color = 'currentColor', opacity = 0.08 }) => (
+  <svg viewBox="0 0 600 400" preserveAspectRatio="none"
+       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+    {Array.from({ length: 7 }).map((_, i) => {
+      const yc = 200 + (i - 3) * 30;
+      return (
+        <ellipse key={i} cx="300" cy={yc} rx={260 - i * 22} ry={130 - i * 12}
+          fill="none" stroke={color} strokeWidth="1" opacity={opacity}/>
+      );
+    })}
+  </svg>
+);
+
+Object.assign(window, { HeroIllustration, PotatoMark, MountainMark, TopoLines });
+
+
+// ============ pages.jsx ============
+// ============================================================
+// HOME page
+// ============================================================
+const PHOTOS = {
+  potatoes:    'uploads/IMG_4724.jpeg',
+  potatoHand:  'uploads/IMG_4717.jpeg',
+  sack:        'uploads/7EA91969-613E-4C15-A603-5E017AA2508E-59763235.PNG',
+  field:       'uploads/IMG_4742.jpeg',
+  mountains:   'uploads/IMG_4128.jpeg',
+  harvest:     'uploads/IMG_3831.jpeg',
+  soil:        'uploads/IMG_4105.jpeg',
+  basket:      'uploads/IMG_4689.jpeg',
+  village:     'uploads/IMG_4174.jpeg',
+  bag:         'uploads/99E8B6EA-99CF-44FF-B1ED-6D2127511A19-df4fc5a1.PNG',
+  hands:       'uploads/IMG_4614.jpeg',
+  forest:      'uploads/IMG_4710.jpeg',
+  irrigation:  'uploads/IMG_4686.jpeg',
+  rainbow:     'uploads/IMG_4636.jpeg',
+  tractor:     'uploads/IMG_4130.jpeg',
+  earlyField:  'uploads/IMG_4161.jpeg',
+  sunsetField: 'uploads/IMG_4742.jpeg',
+  lakeRefl:    'uploads/IMG_4709.jpeg'
+};
+
+// Hero — dark aubergine + illustration
+function Hero({ onNavigate, heroVariant = 'illustration' }) {
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => { const t = setTimeout(() => setLoaded(true), 60); return () => clearTimeout(t); }, []);
+  const title = 'Η ποιότητα γεννιέται στο υψόμετρο.';
+  const words = title.split(' ');
+
+  return (
+    <section style={{
+      background: 'var(--bg-dark)', color: 'var(--bg-dark-ink)',
+      position: 'relative', overflow: 'hidden',
+      paddingTop: 96, paddingBottom: 0
+    }}>
+      <Container>
+        <div style={{
+          display: 'grid', gap: 48,
+          gridTemplateColumns: 'minmax(0, 1fr)',
+          alignItems: 'end'
+        }}>
+          <div style={{ paddingTop: 32, paddingBottom: 64, maxWidth: 920 }}>
+            <div style={{ opacity: loaded ? 1 : 0, transition: 'opacity 600ms var(--ease)' }}>
+              <Eyebrow color="var(--accent)" style={{ marginBottom: 28 }}>
+                Βιολογικό προϊόν · Άνω Βρόντου Σερρών · 1.100μ
+              </Eyebrow>
+            </div>
+            <h1 style={{
+              fontFamily: 'var(--font-display)', fontWeight: 300,
+              fontSize: 'clamp(48px, 8.4vw, 116px)',
+              lineHeight: 0.98, letterSpacing: '-0.03em',
+              margin: 0, color: 'var(--bg-dark-ink)',
+              fontVariationSettings: '"opsz" 144, "wght" 300',
+              textWrap: 'balance', maxWidth: '14ch'
+            }}>
+              {words.map((w, i) => (
+                <span key={i} style={{ display: 'inline-block', overflow: 'hidden', marginRight: '0.22em' }}>
+                  <span className={'hero-word' + (loaded ? ' in' : '')}
+                        style={{ transitionDelay: (120 + i * 100) + 'ms', display: 'inline-block' }}>
+                    {w}
+                    {i === 1 && <span style={{ color: 'var(--accent)' }}>.</span>}
+                  </span>
+                </span>
+              ))}
+            </h1>
+            <Reveal>
+              <p style={{
+                marginTop: 28, fontSize: 'clamp(17px, 1.7vw, 22px)',
+                lineHeight: 1.5, color: 'var(--bg-dark-soft)',
+                maxWidth: '46ch', textWrap: 'pretty'
+              }}>
+                Ορεινή καλλιέργεια στην Άνω Βρόντου Σερρών, στα 1.100 μέτρα ύψος.
+                Φυσιολογικός κύκλος ωρίμανσης, χωρίς πρακτικές επιτάχυνσης.
+                100% ελληνική παραγωγή — από τον Βασίλη Παπαδόπουλο, Άνω Βρόντου Σερρών.
+              </p>
+            </Reveal>
+            <Reveal style={{ marginTop: 36, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+              <a href={CONTACT.whatsapp} target="_blank" rel="noopener" className="btn btn-accent">
+                <WhatsAppIcon /> Παραγγελία στο WhatsApp
+              </a>
+              <a href="#" className="btn btn-outline" onClick={(e) => { e.preventDefault(); onNavigate('product'); }}>
+                Το προϊόν <ArrowRight />
+              </a>
+            </Reveal>
+            <Reveal style={{
+              marginTop: 56, display: 'flex', gap: 32, flexWrap: 'wrap',
+              color: 'var(--bg-dark-soft)', fontSize: 13,
+              fontFamily: 'var(--font-mono)', letterSpacing: '0.05em'
+            }}>
+              <span>ΒΑΣΙΛΗΣ ΠΑΠΑΔΟΠΟΥΛΟΣ · ΠΑΡΑΓΩΓΟΣ</span>
+              <span>·</span>
+              <span>ΑΝΩ ΒΡΟΝΤΟΥ · ΣΕΡΡΩΝ</span>
+              <span>·</span>
+              <span>1.100μ ΥΨΟΣ</span>
+            </Reveal>
+          </div>
+        </div>
+      </Container>
+
+      {/* Bottom illustration band — flush to section bottom */}
+      <div style={{ marginTop: -24 }}>
+        <HeroIllustration height={'min(48vw, 420px)'} />
+      </div>
+    </section>
+  );
+}
+
+// Marquee signature strip
+function Marquee() {
+  const items = ['Η ποιότητα γεννιέται στο υψόμετρο', '·', 'Άνω Βρόντου Σερρών', '·', '1.100μ ύψος', '·', 'Φυσιολογικός κύκλος ωρίμανσης',
+                 '·', '100% Ελληνική παραγωγή', '·', 'Βασίλης Παπαδόπουλος', '·'];
+  return (
+    <section style={{ paddingTop: 36, paddingBottom: 36, background: 'var(--paper)',
+      borderTop: '1px solid var(--stone-light)', borderBottom: '1px solid var(--stone-light)' }}>
+      <div className="marquee-wrap">
+        <div className="marquee">
+          {[...items, ...items, ...items].map((t, i) => (
+            <span key={i} style={{
+              fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 38px)',
+              fontWeight: 300, letterSpacing: '-0.01em',
+              color: t === '·' ? 'var(--accent)' : 'var(--ink)',
+              fontVariationSettings: '"opsz" 144, "wght" 300'
+            }}>{t}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Intro — 2-column quiet introduction
+function IntroBlock({ onNavigate }) {
+  return (
+    <section style={{ paddingTop: 'clamp(80px, 12vw, 140px)', paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
+      <Container>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'clamp(40px, 6vw, 96px)', alignItems: 'start' }}>
+          <Reveal>
+            <Eyebrow style={{ marginBottom: 24 }}>Ποιοι είμαστε</Eyebrow>
+            <h2 style={{
+              fontFamily: 'var(--font-display)', fontWeight: 300,
+              fontSize: 'clamp(32px, 4.6vw, 56px)', lineHeight: 1.05,
+              letterSpacing: '-0.018em', margin: 0,
+              fontVariationSettings: '"opsz" 144, "wght" 300', textWrap: 'balance'
+            }}>
+              Βασίλης Παπαδόπουλος.<br/>
+              <span style={{ color: 'var(--accent)' }}>Ορεινή καλλιέργεια</span> με μεράκι.
+            </h2>
+          </Reveal>
+          <Reveal style={{ paddingTop: 8 }}>
+            <p style={{ fontSize: 18, lineHeight: 1.7, color: 'var(--ink)', margin: 0, maxWidth: '52ch' }}>
+              Ο Βασίλης Παπαδόπουλος καλλιεργεί πατάτες και φασόλια
+              στον Άνω Βρόντου Σερρών, στα 1.100 μέτρα ύψος. Χρόνια εμπειρία,
+              μεράκι και σεβασμός στους φυσικούς ρυθμούς της γης.
+            </p>
+            <p style={{ fontSize: 18, lineHeight: 1.7, color: 'var(--ink-soft)', marginTop: 20, marginBottom: 0, maxWidth: '52ch' }}>
+              Τα προϊόντα μας δεν έχουν μυστικά. Έχουν υψόμετρο, καθαρό ορεινό αέρα,
+              νερό από φυσικές πηγές και χρόνο — γιατί δεν επιταχύνουμε ποτέ την παραγωγή.
+            </p>
+            <div style={{ marginTop: 32 }}>
+              <a href="#" className="btn btn-ghost" onClick={(e) => { e.preventDefault(); onNavigate('production'); }}>
+                Η ιστορία μας <span className="arrow"><ArrowRight /></span>
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// Value props — 3 cards
+function ValueProps() {
+  const items = [
+    { n: '01', t: 'Βιολογικό προϊόν',
+      d: 'Χωρίς συνθετικά λιπάσματα, χωρίς πρακτικές που επιταχύνουν την παραγωγή. Η φύση παίρνει το χρόνο της.' },
+    { n: '02', t: 'Από τα 1.100μ',
+      d: 'Το ιδιαίτερο μικροκλίμα της Άνω Βρόντού — ο καθαρός ορεινός αέρας και η θερμοκρασία — χαρίζει πυκνή υφή και έντονη γεύση.' },
+    { n: '03', t: 'Παραγωγός & εμπορία',
+      d: 'Χωρίς μεσάζοντες. Ο Βασίλης Παπαδόπουλος παραδίδει ο ίδιος — λιανική, χονδρική, αποστολή σε όλη την Ελλάδα.' }
+  ];
+  return (
+    <section style={{ paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
+      <Container>
+        <Reveal stagger style={{
+          display: 'grid', gap: 0,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          borderTop: '1px solid var(--stone-light)'
+        }}>
+          {items.map((it, i) => (
+            <div key={it.n} style={{
+              padding: '40px 32px 48px 0',
+              borderRight: i < items.length - 1 ? '1px solid var(--stone-light)' : 0,
+              paddingLeft: i > 0 ? 32 : 0
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-mono)', fontSize: 12,
+                letterSpacing: '0.1em', color: 'var(--accent)', marginBottom: 24
+              }}>{it.n}</div>
+              <h3 style={{
+                fontFamily: 'var(--font-display)', fontWeight: 400,
+                fontSize: 'clamp(24px, 2.6vw, 32px)', letterSpacing: '-0.01em',
+                margin: 0, lineHeight: 1.1
+              }}>{it.t}</h3>
+              <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--ink-soft)',
+                marginTop: 16, marginBottom: 0 }}>{it.d}</p>
+            </div>
+          ))}
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+// Featured photo block — big editorial image with caption
+function FeaturedShowcase({ onNavigate }) {
+  return (
+    <section style={{ paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: 'clamp(80px, 12vw, 140px)', background: 'var(--paper-2)' }}>
+      <Container>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(32px, 5vw, 64px)', alignItems: 'center' }}>
+          <Reveal>
+            <Eyebrow style={{ marginBottom: 20 }}>Το προϊόν</Eyebrow>
+            <h2 style={{
+              fontFamily: 'var(--font-display)', fontWeight: 300,
+              fontSize: 'clamp(32px, 4.6vw, 56px)', lineHeight: 1.05,
+              letterSpacing: '-0.018em', margin: 0, textWrap: 'balance', maxWidth: '14ch',
+              fontVariationSettings: '"opsz" 144, "wght" 300'
+            }}>
+              Πατάτες, Μπλε Πατάτες, Φασόλια.
+            </h2>
+            <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--ink-soft)', marginTop: 22, maxWidth: '46ch' }}>
+              Τρία προϊόντα, μια φιλοσοφία: συγκομιδή στη φυσική ωριμότητα,
+              ώστε να διατηρούνται η ποιότητα και τα χαρακτηριστικά του καθενός.
+            </p>
+            <div style={{ marginTop: 32, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+              <a href="#" className="btn btn-ink" onClick={(e) => { e.preventDefault(); onNavigate('product'); }}>
+                Δείτε τις ποικιλίες <ArrowRight />
+              </a>
+              <a href={CONTACT.whatsapp} target="_blank" rel="noopener" className="btn btn-whatsapp">
+                <WhatsAppIcon /> WhatsApp
+              </a>
+            </div>
+          </Reveal>
+          <Reveal>
+            <div className="photo" style={{ aspectRatio: '4/5' }}>
+              <img src={PHOTOS.potatoes} alt="Φρέσκες πατάτες σε καλάθι" loading="lazy"/>
+            </div>
+          </Reveal>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// Quote — full-bleed dark
+function QuoteBlock() {
+  return (
+    <section style={{
+      background: 'var(--bg-dark)', color: 'var(--bg-dark-ink)',
+      paddingTop: 'clamp(80px, 12vw, 140px)', paddingBottom: 'clamp(80px, 12vw, 140px)',
+      position: 'relative', overflow: 'hidden'
+    }}>
+      <Container>
+        <Reveal style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+          <div style={{
+            fontFamily: 'var(--font-display)', fontSize: 96, lineHeight: 0.6,
+            color: 'var(--accent)', marginBottom: 32,
+            fontVariationSettings: '"opsz" 144, "wght" 300'
+          }}>“</div>
+          <blockquote style={{
+            fontFamily: 'var(--font-display)', fontWeight: 300,
+            fontSize: 'clamp(28px, 4.2vw, 52px)', lineHeight: 1.2,
+            letterSpacing: '-0.015em', margin: 0, maxWidth: '20ch', marginInline: 'auto',
+            color: 'var(--bg-dark-ink)', textWrap: 'balance',
+            fontVariationSettings: '"opsz" 144, "wght" 300'
+          }}>
+            «Η καλή πατάτα δεν θέλει τέχνη. Θέλει χώμα, νερό, και κάποιον που να την προσέχει.»
+          </blockquote>
+          <div style={{ marginTop: 40, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--bg-dark-soft)' }}>
+            Βασίλειος Παπαδόπουλος · παραγωγός
+          </div>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+// CTA — order phone + whatsapp
+function OrderCTA({ small }) {
+  return (
+    <section style={{
+      paddingTop: 'clamp(80px, 12vw, 140px)',
+      paddingBottom: 'clamp(80px, 12vw, 140px)', background: 'var(--paper)'
+    }}>
+      <Container>
+        <Reveal style={{
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: 'clamp(32px, 5vw, 64px)', alignItems: 'center'
+        }}>
+          <div>
+            <Eyebrow style={{ marginBottom: 24 }}>Παραγγελία</Eyebrow>
+            <h2 style={{
+              fontFamily: 'var(--font-display)', fontWeight: 300,
+              fontSize: 'clamp(32px, 4.8vw, 60px)', lineHeight: 1.05,
+              letterSpacing: '-0.02em', margin: 0, textWrap: 'balance', maxWidth: '14ch',
+              fontVariationSettings: '"opsz" 144, "wght" 300'
+            }}>
+              Πάρτε μας τηλέφωνο.<br/>Απαντάμε <span style={{ color: 'var(--accent)' }}>στο πρώτο</span> κουδούνισμα.
+            </h2>
+            <p style={{ fontSize: 18, lineHeight: 1.6, color: 'var(--ink-soft)', marginTop: 22, maxWidth: '46ch' }}>
+              Δεν έχουμε καλάθι ή online πληρωμή. Έχουμε όμως τηλέφωνο και WhatsApp —
+              θα σας πούμε διαθεσιμότητα, τιμή και πότε φεύγει το δέμα.
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <a href={CONTACT.phoneHref} className="btn btn-ink" style={{ padding: '20px 28px', fontSize: 18 }}>
+              <PhoneIcon size={20} /> {CONTACT.phone}
+            </a>
+            <a href={CONTACT.whatsapp} target="_blank" rel="noopener" className="btn btn-whatsapp" style={{ padding: '20px 28px', fontSize: 18 }}>
+              <WhatsAppIcon size={20} /> Στείλτε WhatsApp
+            </a>
+            <div style={{ fontSize: 14, color: 'var(--ink-soft)', marginTop: 8 }}>
+              {CONTACT.hours} · Αποστολή σε όλη την Ελλάδα
+            </div>
+          </div>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+// ============================================================
+// PRODUCT page
+// ============================================================
+function ProductHeader() {
+  return (
+    <section style={{ paddingTop: 96, paddingBottom: 56, background: 'var(--paper)' }}>
+      <Container>
+        <Reveal>
+          <Eyebrow style={{ marginBottom: 24 }}>Το προϊόν</Eyebrow>
+          <h1 style={{
+            fontFamily: 'var(--font-display)', fontWeight: 300,
+            fontSize: 'clamp(48px, 7vw, 96px)', lineHeight: 1.02,
+            letterSpacing: '-0.028em', margin: 0,
+            fontVariationSettings: '"opsz" 144, "wght" 300', textWrap: 'balance', maxWidth: '14ch'
+          }}>
+            Βιολογική πατάτα <span style={{ color: 'var(--accent)' }}>όπως πάντα</span>.
+          </h1>
+          <p style={{ fontSize: 20, color: 'var(--ink-soft)', marginTop: 28, lineHeight: 1.55, maxWidth: '52ch' }}>
+            Καλλιέργεια χωρίς συνθετικά λιπάσματα. Συγκομιδή με το χέρι όταν είναι έτοιμη.
+            Καμία αλυσίδα, καμία ψυκτική παρέμβαση που να σβήνει τη γεύση.
+          </p>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function ProductPhoto() {
+  return (
+    <section style={{ paddingBottom: 'clamp(40px, 8vw, 80px)' }}>
+      <Container>
+        <Reveal>
+          <div className="photo" style={{ aspectRatio: '16/8' }}>
+            <img src={PHOTOS.harvest} alt="Συγκομιδή πατάτας στο χωράφι" loading="lazy"/>
+          </div>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function WhyBio() {
+  const items = [
+    { t: 'Χωρίς φυτοφάρμακα',  d: 'Καμία χημική επέμβαση στην ανάπτυξη. Η φύση παίρνει το χρόνο της.' },
+    { t: 'Βιολογικό λίπασμα',  d: 'Κοπριά και χλωρή λίπανση. Το χώμα μένει ζωντανό από τη μια χρονιά στην άλλη.' },
+    { t: 'Νερό από πηγή',      d: 'Άρδευση από φυσικές πηγές του βουνού. Χωρίς γεωτρήσεις, χωρίς αντλίες.' },
+    { t: 'Με το χέρι',         d: 'Διαλογή και συσκευασία γίνεται με το χέρι. Χωρίς γρατζουνιές, χωρίς ωοτοκίες.' }
+  ];
+  return (
+    <section style={{ paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
+      <Container>
+        <SectionTitle eyebrow="Γιατί βιολογικές" title="Τέσσερις δουλειές που κάνουμε διαφορετικά." />
+        <Reveal stagger style={{
+          display: 'grid', gap: 0,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          borderTop: '1px solid var(--stone-light)'
+        }}>
+          {items.map((it, i) => (
+            <div key={i} style={{
+              padding: '40px 28px',
+              borderBottom: '1px solid var(--stone-light)',
+              borderRight: '1px solid var(--stone-light)'
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent)',
+                letterSpacing: '0.1em', marginBottom: 20
+              }}>{String(i + 1).padStart(2, '0')}</div>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 400,
+                fontSize: 24, letterSpacing: '-0.01em', margin: 0, lineHeight: 1.2 }}>{it.t}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.6, color: 'var(--ink-soft)',
+                marginTop: 14, marginBottom: 0 }}>{it.d}</p>
+            </div>
+          ))}
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function Varieties() {
+  const list = [
+    { name: 'Πατάτες',  use: 'Άνω Βρόντου · Σερρών',
+      desc: 'Καλλιεργημένες στα 1.100μ, με φυσιολογικό κύκλο ωρίμανσης. Πυκνή υφή, γλυκύτητα και αντοχή στο μαγείρεμα χάρη στο ιδιαίτερο μικροκλίμα.',
+      season: 'Συγκομιδή Αύγουστος – Σεπτέμβριος', photo: PHOTOS.potatoes },
+    { name: 'Μπλε Πατάτες', use: 'Blue Potatoes · Υψηλή διατρ. αξία',
+      desc: 'Φυσικό μπλε χώμα, πλούσιο σε αντιοξειδωτικά. Καλλιεργούνται στα καθαρά νερά και το πλούσιο έδαφος της Άνω Βρόντούς. Υπέροχη γεύση.',
+      season: 'Συγκομιδή Σεπτέμβριος', photo: PHOTOS.bag },
+    { name: 'Φασόλια',  use: 'Ορεινά · Σερρών',
+      desc: 'Ορεινή καλλιέργεια με αργό κύκλο ωρίμανσης. Έντονη γεύση, σφιχτή υφή. Ιδανικά για φασολάδα ή ψητά.',
+      season: 'Συγκομιδή Σεπτέμβριος', photo: PHOTOS.mountains },
+
+  ];
+  return (
+    <section style={{ paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: 'clamp(80px, 12vw, 140px)', background: 'var(--paper-2)' }}>
+      <Container>
+        <SectionTitle eyebrow="Ποικιλίες" title="Τρία προϊόντα. Καθένα για το δικό του." />
+        <Reveal stagger style={{
+          display: 'grid', gap: 48,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))'
+        }}>
+          {list.map((v, i) => (
+            <div key={v.name}>
+              <div className="photo" style={{ aspectRatio: '4/5', marginBottom: 24 }}>
+                <img src={v.photo} alt={'Πατάτα ' + v.name} loading="lazy"/>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 400,
+                  fontSize: 28, margin: 0, letterSpacing: '-0.01em' }}>{v.name}</h3>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12,
+                  color: 'var(--accent)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                  {v.use}
+                </span>
+              </div>
+              <p style={{ fontSize: 15, lineHeight: 1.6, color: 'var(--ink-soft)',
+                marginTop: 14, marginBottom: 12 }}>{v.desc}</p>
+              <div style={{ fontSize: 13, color: 'var(--stone)',
+                fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}>{v.season}</div>
+            </div>
+          ))}
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function Certifications() {
+  const items = [
+    { code: 'GR-BIO-01', t: 'Πιστοποίηση ΔΗΩ', d: 'Έλεγχος και πιστοποίηση από Οργανισμό Ελέγχου & Πιστοποίησης ΔΗΩ. Ετήσιος έλεγχος αγρού και αποθηκών.' },
+    { code: 'EU 834/07', t: 'Eυρωπαϊκή πιστοποίηση Bio', d: 'Συμμόρφωση με τον Κανονισμό (ΕΚ) 834/2007. Σήμα ΕΕ Βιολογικής Παραγωγής σε κάθε σακί.' },
+    { code: 'ΟΠΕΚΕΠΕ',  t: 'Καταχωρημένος παραγωγός', d: 'Δηλωμένη παραγωγή ανά αγροτεμάχιο. Ιχνηλασιμότητα από το χωράφι μέχρι την κουζίνα σας.' }
+  ];
+  return (
+    <section style={{ paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
+      <Container>
+        <SectionTitle eyebrow="Πιστοποιήσεις" title="Με σφραγίδα. Κάθε σακί." />
+        <Reveal stagger style={{ display: 'grid', gap: 24,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+          {items.map((it, i) => (
+            <div key={i} style={{
+              padding: 32, background: 'var(--card)',
+              border: '1px solid var(--stone-light)', borderRadius: 8
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-mono)', fontSize: 11,
+                color: 'var(--accent)', letterSpacing: '0.1em',
+                marginBottom: 20
+              }}>{it.code}</div>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 400,
+                fontSize: 22, margin: 0, letterSpacing: '-0.005em' }}>{it.t}</h3>
+              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--ink-soft)',
+                marginTop: 14, marginBottom: 0 }}>{it.d}</p>
+            </div>
+          ))}
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function Packaging() {
+  const items = [
+    { kg: '5kg',  use: 'Σπίτι · μικρή οικογένεια' },
+    { kg: '10kg', use: 'Σπίτι · μεγάλη οικογένεια' },
+    { kg: '25kg', use: 'Εστιατόρια · ταβέρνες' },
+    { kg: '500kg', use: 'Χονδρική · παλέτα' }
+  ];
+  return (
+    <section style={{ paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: 'clamp(80px, 12vw, 140px)', background: 'var(--bg-dark)', color: 'var(--bg-dark-ink)' }}>
+      <Container>
+        <SectionTitle eyebrow="Συσκευασίες" eyebrowColor="var(--accent)" color="var(--bg-dark-ink)" leadColor="var(--bg-dark-soft)" title="Από το σακί στο παλέτο." lead="Λιανική για κουζίνα. Χονδρική για ταβέρνες, παντοπωλεία και εμπόρους. Παράδοση σε όλη την Ελλάδα." />
+        <Reveal stagger style={{ display: 'grid', gap: 0,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          borderTop: '1px solid rgba(243,232,211,0.18)' }}>
+          {items.map((it, i) => (
+            <div key={i} style={{
+              padding: '36px 28px 40px',
+              borderRight: i < items.length - 1 ? '1px solid rgba(243,232,211,0.18)' : 0,
+              borderBottom: '1px solid rgba(243,232,211,0.18)'
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-display)', fontSize: 56, fontWeight: 300,
+                color: 'var(--accent)', letterSpacing: '-0.025em', lineHeight: 1,
+                fontVariationSettings: '"opsz" 144, "wght" 300'
+              }}>{it.kg}</div>
+              <div style={{
+                fontSize: 13, color: 'var(--bg-dark-soft)', marginTop: 14,
+                letterSpacing: '0.04em', textTransform: 'uppercase'
+              }}>{it.use}</div>
+
+            </div>
+          ))}
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+// ============================================================
+// PRODUCTION / ABOUT page
+// ============================================================
+function ProductionHeader() {
+  return (
+    <section style={{ paddingTop: 96, paddingBottom: 56, background: 'var(--paper)' }}>
+      <Container>
+        <Reveal>
+          <Eyebrow style={{ marginBottom: 24 }}>Παραγωγή · Άνω Βρόντου</Eyebrow>
+          <h1 style={{
+            fontFamily: 'var(--font-display)', fontWeight: 300,
+            fontSize: 'clamp(44px, 6.6vw, 88px)', lineHeight: 1.03,
+            letterSpacing: '-0.025em', margin: 0,
+            fontVariationSettings: '"opsz" 144, "wght" 300', textWrap: 'balance', maxWidth: '16ch'
+          }}>
+            Ένας τόπος. Ένας παραγωγός. Προϊόντα από βουνό.
+          </h1>
+          <p style={{ fontSize: 20, color: 'var(--ink-soft)', marginTop: 28,
+            lineHeight: 1.55, maxWidth: '52ch' }}>
+            Ο Άνω Βρόντου βρίσκεται στις βόρειες πλαγιές του Μενοικίου, στα 1.100 μέτρα ύψος.
+            Ιδιαίτερο μικροκλίμα, καθαρός ορεινός αέρας και φυσικές πηγές νερού. Εδώ καλλιεργούμε.
+          </p>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function ProductionPhoto() {
+  return (
+    <section style={{ paddingBottom: 'clamp(40px, 8vw, 80px)' }}>
+      <Container>
+        <Reveal>
+          <div className="photo" style={{ aspectRatio: '16/9' }}>
+            <img src={PHOTOS.mountains} alt="Ορεινό τοπίο των Σερρών" loading="lazy"/>
+          </div>
+          <div style={{ marginTop: 14, fontSize: 13, color: 'var(--stone)',
+            fontFamily: 'var(--font-mono)', letterSpacing: '0.05em',
+            display: 'flex', justifyContent: 'space-between' }}>
+            <span>ΆΝΩ ΒΡΌΝΤΟΥ · ΣΕΡΡΏΝ · ΜΕΝΟΊΚΙΟ</span>
+            <span>41.32° N · 23.46° E · 1.100 m</span>
+          </div>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function StoryBlock() {
+  const paragraphs = [
+    'Ο Βασίλης Παπαδόπουλος καλλιεργεί στον Άνω Βρόντου Σερρών με εμπειρία πολλών χρόνων. Το κτήμα βρίσκεται στα 1.100 μέτρα ύψος, σε μια περιοχή με ιδιαίτερο μικροκλίμα — καθαρός ορεινός αέρας, φυσικές πηγές νερού και εύφορο ορεινό έδαφος.',
+    'Η φιλοσοφία είναι απλή: σεβασμός στους φυσικούς ρυθμούς της καλλιέργειας. Δεν εφαρμόζονται πρακτικές που επιταχύνουν την παραγωγή για δεύτερη συγκομιδή μέσα στην ίδια χρονιά. Η συγκομιδή γίνεται στη φυσική ωριμότητα κάθε προϊόντος.',
+    'Σήμερα παράγει πατάτες (λευκές και μπλε) και φασόλια. Πουλάει χωρίς μεσάζοντες — σε σπίτια, ταβέρνες, παντοπωλεία και εμπόρους — από το σακί των 5kg μέχρι το παλέτο, με αποστολή σε όλη την Ελλάδα.'
+  ];
+  return (
+    <section style={{ paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
+      <Container narrow>
+        <Reveal>
+          <Eyebrow style={{ marginBottom: 24 }}>Η ιστορία</Eyebrow>
+          <h2 style={{
+            fontFamily: 'var(--font-display)', fontWeight: 300,
+            fontSize: 'clamp(28px, 4vw, 48px)', lineHeight: 1.1,
+            letterSpacing: '-0.018em', margin: 0,
+            fontVariationSettings: '"opsz" 144, "wght" 300', textWrap: 'balance'
+          }}>
+            Ένας παραγωγός. Ένας τρόπος δουλειάς.
+          </h2>
+        </Reveal>
+        <Reveal style={{ marginTop: 40, display: 'grid', gap: 18 }}>
+          {paragraphs.map((p, i) => (
+            <p key={i} style={{
+              fontSize: 18, lineHeight: 1.75, color: i === 0 ? 'var(--ink)' : 'var(--ink-soft)',
+              margin: 0, maxWidth: '62ch', textWrap: 'pretty'
+            }}>{p}</p>
+          ))}
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function YearCycle() {
+  const months = [
+    { m: 'Μάρτιος',    p: 'Όργωμα', d: 'Προετοιμασία του χωραφιού. Έλεγχος εδάφους, χλωρή λίπανση.' },
+    { m: 'Απρίλιος',   p: 'Φύτεμα', d: 'Φυτεύουμε με σιγανό βήμα, σειρά-σειρά. Καθαροί σπόροι, κατάλληλη απόσταση.' },
+    { m: 'Ιούν–Αύγ',   p: 'Ωρίμανση', d: 'Άρδευση από πηγή, ξεβοτάνισμα με το χέρι. Καμία χημική επέμβαση.' },
+    { m: 'Σεπ–Οκτ',    p: 'Συγκομιδή', d: 'Συλλογή με το χέρι. Διαλογή, καθαρισμός, συσκευασία στο χωριό.' }
+  ];
+  return (
+    <section style={{
+      paddingTop: 'clamp(40px, 8vw, 80px)',
+      paddingBottom: 'clamp(80px, 12vw, 140px)',
+      background: 'var(--paper-2)'
+    }}>
+      <Container>
+        <SectionTitle eyebrow="Ο χρόνος της πατάτας" title="Τέσσερις εποχές. Με τη σειρά." />
+        <Reveal stagger style={{
+          display: 'grid', gap: 0,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          borderTop: '1px solid var(--stone-light)'
+        }}>
+          {months.map((mo, i) => (
+            <div key={i} style={{
+              padding: '36px 24px 40px',
+              borderRight: i < months.length - 1 ? '1px solid var(--stone-light)' : 0
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-mono)', fontSize: 12,
+                color: 'var(--accent)', letterSpacing: '0.1em', marginBottom: 18
+              }}>0{i + 1} · {mo.m.toUpperCase()}</div>
+              <h3 style={{
+                fontFamily: 'var(--font-display)', fontWeight: 400,
+                fontSize: 26, margin: 0, letterSpacing: '-0.01em', lineHeight: 1.1
+              }}>{mo.p}</h3>
+              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--ink-soft)',
+                marginTop: 14, marginBottom: 0 }}>{mo.d}</p>
+            </div>
+          ))}
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+function ProducerProfile() {
+  return (
+    <section style={{ paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
+      <Container>
+        <Reveal style={{
+          display: 'grid', gap: 'clamp(32px, 5vw, 64px)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', alignItems: 'center'
+        }}>
+          <image-slot id="vasilis-producer" style="display:block;width:100%;aspect-ratio:4/5" shape="rounded" radius="16" placeholder="Σύρε φωτογραφία του Βασίλη εδώ"></image-slot>
+          <div>
+            <Eyebrow style={{ marginBottom: 24 }}>Ο παραγωγός</Eyebrow>
+            <h2 style={{
+              fontFamily: 'var(--font-display)', fontWeight: 300,
+              fontSize: 'clamp(32px, 4.6vw, 56px)', lineHeight: 1.05,
+              letterSpacing: '-0.018em', margin: 0, textWrap: 'balance',
+              fontVariationSettings: '"opsz" 144, "wght" 300'
+            }}>
+              Βασίλης Παπαδόπουλος
+            </h2>
+            <div style={{ marginTop: 14, fontSize: 14, color: 'var(--accent)',
+              fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+              Παραγωγός · Άνω Βρόντου Σερρών
+            </div>
+            <p style={{ fontSize: 17, lineHeight: 1.7, color: 'var(--ink)', marginTop: 28, maxWidth: '52ch' }}>
+              Ο Βασίλης καλλιεργεί την ελληνική γη εδώ και πολλά χρόνια.
+              Η εμπειρία, η φροντίδα και το μεράκι του αποτυπώνονται σε κάθε προϊόν που φεύγει
+              από το κτήμα της Άνω Βρόντούς.
+            </p>
+            <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--ink-soft)', marginTop: 16, maxWidth: '52ch' }}>
+              Πίσω από κάθε σακί πατάτας και κάθε κιλό φασολιών
+              υπάρχει ένας Έλληνας παραγωγός και ένας τόπος με μοναδικά
+              χαρακτηριστικά — η Άνω Βρόντου στα 1.100 μέτρα.
+            </p>
+          </div>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+// ============================================================
+// CONTACT page
+// ============================================================
+function ContactPage() {
+  const [sent, setSent] = React.useState(false);
+  const [form, setForm] = React.useState({ name: '', email: '', phone: '', message: '' });
+
+  return (
+    <section style={{ paddingTop: 96, paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
+      <Container>
+        <Reveal>
+          <Eyebrow style={{ marginBottom: 24 }}>Επικοινωνία</Eyebrow>
+          <h1 style={{
+            fontFamily: 'var(--font-display)', fontWeight: 300,
+            fontSize: 'clamp(48px, 7.5vw, 104px)', lineHeight: 1.02,
+            letterSpacing: '-0.028em', margin: 0,
+            fontVariationSettings: '"opsz" 144, "wght" 300', textWrap: 'balance', maxWidth: '14ch'
+          }}>
+            Πάρτε <span style={{ color: 'var(--accent)' }}>τηλέφωνο</span>.
+          </h1>
+          <p style={{ fontSize: 20, color: 'var(--ink-soft)', marginTop: 24, lineHeight: 1.55, maxWidth: '48ch' }}>
+            Είναι ο πιο γρήγορος τρόπος. Διαθεσιμότητα, τιμή, αποστολή — σε ένα τηλεφώνημα.
+          </p>
+        </Reveal>
+
+        {/* Big phone + WhatsApp */}
+        <Reveal style={{ marginTop: 64, display: 'grid', gap: 24,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+          <a href={CONTACT.phoneHref} style={{
+            display: 'flex', alignItems: 'center', gap: 20, padding: '32px 36px',
+            background: 'var(--bg-dark)', color: 'var(--bg-dark-ink)',
+            borderRadius: 8, textDecoration: 'none',
+            transition: 'transform var(--dur-fast) var(--ease)'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+            <PhoneIcon size={32}/>
+            <div>
+              <div style={{ fontSize: 12, opacity: 0.7, letterSpacing: '0.1em',
+                textTransform: 'uppercase' }}>Τηλέφωνο</div>
+              <div style={{
+                fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 400,
+                marginTop: 6, letterSpacing: '-0.01em',
+                fontVariationSettings: '"opsz" 144, "wght" 400'
+              }}>{CONTACT.phone}</div>
+            </div>
+          </a>
+          <a href={CONTACT.whatsapp} target="_blank" rel="noopener" style={{
+            display: 'flex', alignItems: 'center', gap: 20, padding: '32px 36px',
+            background: '#25d366', color: '#fff', borderRadius: 8, textDecoration: 'none',
+            transition: 'transform var(--dur-fast) var(--ease)'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+            <WhatsAppIcon size={32}/>
+            <div>
+              <div style={{ fontSize: 12, opacity: 0.85, letterSpacing: '0.1em',
+                textTransform: 'uppercase' }}>WhatsApp</div>
+              <div style={{
+                fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 400, marginTop: 6,
+                fontVariationSettings: '"opsz" 144, "wght" 400'
+              }}>Στείλτε μήνυμα</div>
+            </div>
+          </a>
+        </Reveal>
+
+        {/* Form + Info */}
+        <div style={{ marginTop: 80, display: 'grid', gap: 'clamp(40px, 6vw, 80px)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+          <div>
+            <Eyebrow style={{ marginBottom: 24 }}>Ή στείλτε φόρμα</Eyebrow>
+            {sent ? (
+              <div style={{
+                padding: 40, background: 'var(--card)',
+                border: '1px solid var(--stone-light)', borderRadius: 8
+              }}>
+                <h3 style={{
+                  fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 400,
+                  margin: 0, letterSpacing: '-0.01em'
+                }}>Σας ευχαριστούμε.</h3>
+                <p style={{ fontSize: 16, color: 'var(--ink-soft)', marginTop: 14, marginBottom: 0 }}>
+                  Θα σας πάρουμε τηλέφωνο μέσα στην ημέρα.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ display: 'grid', gap: 18 }}>
+                <label style={{ display: 'grid', gap: 8 }}>
+                  <span style={{ fontSize: 13, fontWeight: 500 }}>Όνομα</span>
+                  <input className="field" required value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Μαρία Παπαδοπούλου"/>
+                </label>
+                <div style={{ display: 'grid', gap: 18, gridTemplateColumns: '1fr 1fr' }}>
+                  <label style={{ display: 'grid', gap: 8 }}>
+                    <span style={{ fontSize: 13, fontWeight: 500 }}>Τηλέφωνο</span>
+                    <input className="field" type="tel" required value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="6912345678"/>
+                  </label>
+                  <label style={{ display: 'grid', gap: 8 }}>
+                    <span style={{ fontSize: 13, fontWeight: 500 }}>Email</span>
+                    <input className="field" type="email" value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="maria@example.gr"/>
+                  </label>
+                </div>
+                <label style={{ display: 'grid', gap: 8 }}>
+                  <span style={{ fontSize: 13, fontWeight: 500 }}>Τι ψάχνετε</span>
+                  <textarea rows={5} className="field" required value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    placeholder="Π.χ. χρειάζομαι 25kg Spunta για ταβέρνα μου στη Θεσσαλονίκη..."
+                    style={{ resize: 'vertical', fontFamily: 'inherit' }}/>
+                </label>
+                <div><button type="submit" className="btn btn-ink">Αποστολή <ArrowRight /></button></div>
+              </form>
+            )}
+          </div>
+
+          <div>
+            <Eyebrow style={{ marginBottom: 24 }}>Πού θα μας βρείτε</Eyebrow>
+            <div style={{
+              padding: 32, background: 'var(--card)',
+              border: '1px solid var(--stone-light)', borderRadius: 8
+            }}>
+              {[
+                ['Διεύθυνση', CONTACT.village],
+                ['Ώρες', CONTACT.hours],
+                ['Email', CONTACT.email],
+                ['Παράδοση', 'Σε όλη την Ελλάδα (με ταχυμεταφορά ή courier)']
+              ].map(([k, v], i) => (
+                <div key={k} style={{
+                  display: 'grid', gridTemplateColumns: '110px 1fr', gap: 16,
+                  padding: '18px 0',
+                  borderTop: i > 0 ? '1px solid var(--stone-light)' : 0
+                }}>
+                  <span style={{
+                    fontSize: 12, color: 'var(--stone)', letterSpacing: '0.1em',
+                    textTransform: 'uppercase', paddingTop: 2
+                  }}>{k}</span>
+                  <span style={{ fontSize: 15, color: 'var(--ink)' }}>{v}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Map stub */}
+            <div style={{
+              marginTop: 24, aspectRatio: '4/3', borderRadius: 8,
+              background: 'var(--bg-dark)', color: 'var(--bg-dark-ink)',
+              position: 'relative', overflow: 'hidden',
+              border: '1px solid var(--stone-light)'
+            }}>
+              <TopoLines color="var(--bg-dark-soft)" opacity={0.22}/>
+              <div style={{
+                position: 'absolute', inset: 0, display: 'flex',
+                alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16, textAlign: 'center', padding: 24
+              }}>
+                <MountainMark size={36} color="var(--accent)"/>
+                <div style={{
+                  fontFamily: 'var(--font-display)', fontSize: 24,
+                  fontWeight: 400, letterSpacing: '-0.01em',
+                  fontVariationSettings: '"opsz" 144, "wght" 400'
+                }}>Άνω Βρόντου, Σερρών</div>
+                <a className="ul-link" href="https://maps.google.com/?q=Άνω+Βρόντου+Σερρών" target="_blank" rel="noopener" style={{ fontSize: 13, color: 'var(--bg-dark-ink)', opacity: 0.85, textDecoration: 'none', paddingBottom: 4 }}>
+                  Άνοιγμα στο Google Maps <ExternalIcon size={12}/>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+Object.assign(window, {
+  PHOTOS, Hero, Marquee, IntroBlock, ValueProps, FeaturedShowcase, QuoteBlock, OrderCTA,
+  ProductHeader, ProductPhoto, WhyBio, Varieties, Certifications, Packaging,
+  ProductionHeader, ProductionPhoto, StoryBlock, YearCycle, ProducerProfile,
+  ContactPage
+});
+
+
+// ============ tweaks-panel.jsx ============
+
+// tweaks-panel.jsx
+// Reusable Tweaks shell + form-control helpers.
+//
+// Owns the host protocol (listens for __activate_edit_mode / __deactivate_edit_mode,
+// posts __edit_mode_available / __edit_mode_set_keys / __edit_mode_dismissed) so
+// individual prototypes don't re-roll it. Ships a consistent set of controls so you
+// don't hand-draw <input type="range">, segmented radios, steppers, etc.
+//
+// Usage (in an HTML file that loads React + Babel):
+//
+//   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+//     "primaryColor": "#D97757",
+//     "palette": ["#D97757", "#29261b", "#f6f4ef"],
+//     "fontSize": 16,
+//     "density": "regular",
+//     "dark": false
+//   }/*EDITMODE-END*/;
+//
+//   function App() {
+//     const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+//     return (
+//       <div style={{ fontSize: t.fontSize, color: t.primaryColor }}>
+//         Hello
+//         <TweaksPanel>
+//           <TweakSection label="Typography" />
+//           <TweakSlider label="Font size" value={t.fontSize} min={10} max={32} unit="px"
+//                        onChange={(v) => setTweak('fontSize', v)} />
+//           <TweakRadio  label="Density" value={t.density}
+//                        options={['compact', 'regular', 'comfy']}
+//                        onChange={(v) => setTweak('density', v)} />
+//           <TweakSection label="Theme" />
+//           <TweakColor  label="Primary" value={t.primaryColor}
+//                        options={['#D97757', '#2A6FDB', '#1F8A5B', '#7A5AE0']}
+//                        onChange={(v) => setTweak('primaryColor', v)} />
+//           <TweakColor  label="Palette" value={t.palette}
+//                        options={[['#D97757', '#29261b', '#f6f4ef'],
+//                                  ['#475569', '#0f172a', '#f1f5f9']]}
+//                        onChange={(v) => setTweak('palette', v)} />
+//           <TweakToggle label="Dark mode" value={t.dark}
+//                        onChange={(v) => setTweak('dark', v)} />
+//         </TweaksPanel>
+//       </div>
+//     );
+//   }
+//
+// ─────────────────────────────────────────────────────────────────────────────
+
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-body::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.25);
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+
+  .twk-field{appearance:none;box-sizing:border-box;width:100%;min-width:0;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;
+    overflow-wrap:anywhere}
+
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+
+  .twk-num{display:flex;align-items:center;box-sizing:border-box;min-width:0;height:26px;padding:0 0 0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6)}
+  .twk-num-lbl{font-weight:500;color:rgba(41,38,27,.6);cursor:ew-resize;
+    user-select:none;padding-right:8px}
+  .twk-num input{flex:1;min-width:0;height:100%;border:0;background:transparent;
+    font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:0 8px 0 0;
+    outline:none;color:inherit;-moz-appearance:textfield}
+  .twk-num input::-webkit-inner-spin-button,.twk-num input::-webkit-outer-spin-button{
+    -webkit-appearance:none;margin:0}
+  .twk-num-unit{padding-right:8px;color:rgba(41,38,27,.45)}
+
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
+
+  .twk-chips{display:flex;gap:6px}
+  .twk-chip{position:relative;appearance:none;flex:1;min-width:0;height:46px;
+    padding:0;border:0;border-radius:6px;overflow:hidden;cursor:default;
+    box-shadow:0 0 0 .5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.06);
+    transition:transform .12s cubic-bezier(.3,.7,.4,1),box-shadow .12s}
+  .twk-chip:hover{transform:translateY(-1px);
+    box-shadow:0 0 0 .5px rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.12)}
+  .twk-chip[data-on="1"]{box-shadow:0 0 0 1.5px rgba(0,0,0,.85),
+    0 2px 6px rgba(0,0,0,.15)}
+  .twk-chip>span{position:absolute;top:0;bottom:0;right:0;width:34%;
+    display:flex;flex-direction:column;box-shadow:-1px 0 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i{flex:1;box-shadow:0 -1px 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i:first-child{box-shadow:none}
+  .twk-chip svg{position:absolute;top:6px;left:6px;width:13px;height:13px;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+`;
+
+// ── useTweaks ───────────────────────────────────────────────────────────────
+// Single source of truth for tweak values. setTweak persists via the host
+// (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
+  // useState-style call doesn't write a "[object Object]" key into the persisted
+  // JSON block.
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    // Same-window signal so in-page listeners (deck-stage rail thumbnails)
+    // can react — the parent message only reaches the host, not peers.
+    window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
+  }, []);
+  return [values, setTweak];
+}
+
+// ── TweaksPanel ─────────────────────────────────────────────────────────────
+// Floating shell. Registers the protocol listener BEFORE announcing
+// availability — if the announce ran first, the host's activate could land
+// before our handler exists and the toolbar toggle would silently no-op.
+// The close button posts __edit_mode_dismissed so the host's toolbar toggle
+// flips off in lockstep; the host echoes __deactivate_edit_mode back which
+// is what actually hides the panel.
+function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  // Auto-inject a rail toggle when a <deck-stage> is on the page. The
+  // toggle drives the deck's per-viewer _railVisible via window message;
+  // state is mirrored from the same localStorage key the deck reads so
+  // the control reflects reality across reloads. The mechanism is the
+  // message — authors who want custom placement can post it directly
+  // and pass noDeckControls to suppress this one.
+  const hasDeckStage = React.useMemo(
+    () => typeof document !== 'undefined' && !!document.querySelector('deck-stage'),
+    [],
+  );
+  // deck-stage enables its rail in connectedCallback, but this panel can
+  // mount before that element has upgraded. The initial read catches the
+  // common case; the listener covers mounting first. (Older deck-stage.js
+  // copies still wait for the host's __omelette_rail_enabled postMessage —
+  // same listener handles those.)
+  const [railEnabled, setRailEnabled] = React.useState(
+    () => hasDeckStage && !!document.querySelector('deck-stage')?._railEnabled,
+  );
+  React.useEffect(() => {
+    if (!hasDeckStage || railEnabled) return undefined;
+    const onMsg = (e) => {
+      if (e.data && e.data.type === '__omelette_rail_enabled') setRailEnabled(true);
+    };
+    window.addEventListener('message', onMsg);
+    return () => window.removeEventListener('message', onMsg);
+  }, [hasDeckStage, railEnabled]);
+  const [railVisible, setRailVisible] = React.useState(() => {
+    try { return localStorage.getItem('deck-stage.railVisible') !== '0'; } catch (e) { return true; }
+  });
+  const toggleRail = (on) => {
+    setRailVisible(on);
+    window.postMessage({ type: '__deck_rail_visible', on }, '*');
+  };
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', clampToViewport);
+      return () => window.removeEventListener('resize', clampToViewport);
+    }
+    const ro = new ResizeObserver(clampToViewport);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, [open, clampToViewport]);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  };
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy),
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" data-noncommentable=""
+           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">
+          {children}
+          {hasDeckStage && railEnabled && !noDeckControls && (
+            <TweakSection label="Deck">
+              <TweakToggle label="Thumbnail rail" value={railVisible} onChange={toggleRail} />
+            </TweakSection>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ── Layout helpers ──────────────────────────────────────────────────────────
+
+function TweakSection({ label, children }) {
+  return (
+    <>
+      <div className="twk-sect">{label}</div>
+      {children}
+    </>
+  );
+}
+
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+// ── Controls ────────────────────────────────────────────────────────────────
+
+function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+  return (
+    <TweakRow label={label} value={`${value}${unit}`}>
+      <input type="range" className="twk-slider" min={min} max={max} step={step}
+             value={value} onChange={(e) => onChange(Number(e.target.value))} />
+    </TweakRow>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
+              role="switch" aria-checked={!!value}
+              onClick={() => onChange(!value)}><i /></button>
+    </div>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  // The active value is read by pointer-move handlers attached for the lifetime
+  // of a drag — ref it so a stale closure doesn't fire onChange for every move.
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  // Segments wrap mid-word once per-segment width runs out. The track is
+  // ~248px (280 panel − 28 body pad − 4 seg pad), each button loses 12px
+  // to its own padding, and 11.5px system-ui averages ~6.3px/char — so 2
+  // options fit ~16 chars each, 3 fit ~10. Past that (or >3 options), fall
+  // back to a dropdown rather than wrap.
+  const labelLen = (o) => String(typeof o === 'object' ? o.label : o).length;
+  const maxLen = options.reduce((m, o) => Math.max(m, labelLen(o)), 0);
+  const fitsAsSegments = maxLen <= ({ 2: 16, 3: 10 }[options.length] ?? 0);
+  if (!fitsAsSegments) {
+    // <select> emits strings — map back to the original option value so the
+    // fallback stays type-preserving (numbers, booleans) like the segment path.
+    const resolve = (s) => {
+      const m = options.find((o) => String(typeof o === 'object' ? o.value : o) === s);
+      return m === undefined ? s : typeof m === 'object' ? m.value : m;
+    };
+    return <TweakSelect label={label} value={value} options={options}
+                        onChange={(s) => onChange(resolve(s))} />;
+  }
+  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+  const n = opts.length;
+
+  const segAt = (clientX) => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+
+  const onPointerDown = (e) => {
+    setDragging(true);
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = (ev) => {
+      if (!trackRef.current) return;
+      const v = segAt(ev.clientX);
+      if (v !== valueRef.current) onChange(v);
+    };
+    const up = () => {
+      setDragging(false);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  return (
+    <TweakRow label={label}>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
+           className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+        <div className="twk-seg-thumb"
+             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+                      width: `calc((100% - 4px) / ${n})` }} />
+        {opts.map((o) => (
+          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => {
+          const v = typeof o === 'object' ? o.value : o;
+          const l = typeof o === 'object' ? o.label : o;
+          return <option key={v} value={v}>{l}</option>;
+        })}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakText({ label, value, placeholder, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <input className="twk-field" type="text" value={value} placeholder={placeholder}
+             onChange={(e) => onChange(e.target.value)} />
+    </TweakRow>
+  );
+}
+
+function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
+  const clamp = (n) => {
+    if (min != null && n < min) return min;
+    if (max != null && n > max) return max;
+    return n;
+  };
+  const startRef = React.useRef({ x: 0, val: 0 });
+  const onScrubStart = (e) => {
+    e.preventDefault();
+    startRef.current = { x: e.clientX, val: value };
+    const decimals = (String(step).split('.')[1] || '').length;
+    const move = (ev) => {
+      const dx = ev.clientX - startRef.current.x;
+      const raw = startRef.current.val + dx * step;
+      const snapped = Math.round(raw / step) * step;
+      onChange(clamp(Number(snapped.toFixed(decimals))));
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return (
+    <div className="twk-num">
+      <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
+      <input type="number" value={value} min={min} max={max} step={step}
+             onChange={(e) => onChange(clamp(Number(e.target.value)))} />
+      {unit && <span className="twk-num-unit">{unit}</span>}
+    </div>
+  );
+}
+
+// Relative-luminance contrast pick — checkmarks drawn over a swatch need to
+// read on both #111 and #fafafa without per-option configuration. Hex input
+// only (#rgb / #rrggbb); named or rgb()/hsl() colors fall through to "light".
+function __twkIsLight(hex) {
+  const h = String(hex).replace('#', '');
+  const x = h.length === 3 ? h.replace(/./g, (c) => c + c) : h.padEnd(6, '0');
+  const n = parseInt(x.slice(0, 6), 16);
+  if (Number.isNaN(n)) return true;
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return r * 299 + g * 587 + b * 114 > 148000;
+}
+
+const __TwkCheck = ({ light }) => (
+  <svg viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M3 7.2 5.8 10 11 4.2" fill="none" strokeWidth="2.2"
+          strokeLinecap="round" strokeLinejoin="round"
+          stroke={light ? 'rgba(0,0,0,.78)' : '#fff'} />
+  </svg>
+);
+
+// TweakColor — curated color/palette picker. Each option is either a single
+// hex string or an array of 1-5 hex strings; the card adapts — a lone color
+// renders solid, a palette renders colors[0] as the hero (left ~2/3) with the
+// rest stacked in a sharp column on the right. onChange emits the
+// option in the shape it was passed (string stays string, array stays array).
+// Without options it falls back to the native color input for back-compat.
+function TweakColor({ label, value, options, onChange }) {
+  if (!options || !options.length) {
+    return (
+      <div className="twk-row twk-row-h">
+        <div className="twk-lbl"><span>{label}</span></div>
+        <input type="color" className="twk-swatch" value={value}
+               onChange={(e) => onChange(e.target.value)} />
+      </div>
+    );
+  }
+  // Native <input type=color> emits lowercase hex per the HTML spec, so
+  // compare case-insensitively. String() guards JSON.stringify(undefined),
+  // which returns the primitive undefined (no .toLowerCase).
+  const key = (o) => String(JSON.stringify(o)).toLowerCase();
+  const cur = key(value);
+  return (
+    <TweakRow label={label}>
+      <div className="twk-chips" role="radiogroup">
+        {options.map((o, i) => {
+          const colors = Array.isArray(o) ? o : [o];
+          const [hero, ...rest] = colors;
+          const sup = rest.slice(0, 4);
+          const on = key(o) === cur;
+          return (
+            <button key={i} type="button" className="twk-chip" role="radio"
+                    aria-checked={on} data-on={on ? '1' : '0'}
+                    aria-label={colors.join(', ')} title={colors.join(' · ')}
+                    style={{ background: hero }}
+                    onClick={() => onChange(o)}>
+              {sup.length > 0 && (
+                <span>
+                  {sup.map((c, j) => <i key={j} style={{ background: c }} />)}
+                </span>
+              )}
+              {on && <__TwkCheck light={__twkIsLight(hero)} />}
+            </button>
+          );
+        })}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakButton({ label, onClick, secondary = false }) {
+  return (
+    <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'}
+            onClick={onClick}>{label}</button>
+  );
+}
+
+Object.assign(window, {
+  useTweaks, TweaksPanel, TweakSection, TweakRow,
+  TweakSlider, TweakToggle, TweakRadio, TweakSelect,
+  TweakText, TweakNumber, TweakColor, TweakButton,
+});
+
+
+// ============ app.jsx ============
+// Nav, Footer, App — plus Tweaks panel
+// (useState/useEffect/useRef already destructured in primitives.jsx)
+
+// Sticky top nav
+function Nav({ currentPage, onNavigate, palette }) {
+  const [open, setOpen] = useState(false);
+  const links = [
+    { id: 'home',       label: 'Αρχική' },
+    { id: 'product',    label: 'Το προϊόν' },
+    { id: 'production', label: 'Παραγωγή' },
+    { id: 'contact',    label: 'Επικοινωνία' }
+  ];
+  // First section of home is dark (palette aubergine) — make nav blend by default
+  const onDark = currentPage === 'home';
+  return (
+    <header style={{
+      position: 'sticky', top: 0, zIndex: 50,
+      background: onDark ? 'rgba(58,38,36,0.86)' : 'rgba(243,232,211,0.82)',
+      backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+      borderBottom: '1px solid ' + (onDark ? 'rgba(243,232,211,0.12)' : 'var(--stone-light)'),
+      color: onDark ? 'var(--bg-dark-ink)' : 'var(--ink)',
+      transition: 'background var(--dur-med) var(--ease), color var(--dur-med) var(--ease)'
+    }}>
+      <div style={{
+        maxWidth: 1240, margin: '0 auto',
+        padding: '18px var(--gutter)',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24
+      }}>
+        <Wordmark size={22}
+                  color={onDark ? 'var(--bg-dark-ink)' : 'var(--ink)'}
+                  dotColor="var(--accent)"
+                  onClick={() => onNavigate('home')}/>
+        <nav className="nav-links" style={{ display: 'flex', gap: 32 }}>
+          {links.map(l => {
+            const active = currentPage === l.id;
+            return (
+              <a key={l.id} href="#" className={'ul-link' + (active ? ' active' : '')}
+                 onClick={(e) => { e.preventDefault(); onNavigate(l.id); }}
+                 style={{ fontSize: 14, color: 'inherit', textDecoration: 'none',
+                   opacity: active ? 1 : 0.85, paddingBottom: 4 }}>{l.label}</a>
+            );
+          })}
+        </nav>
+        <a href={CONTACT.whatsapp} target="_blank" rel="noopener" className="btn btn-accent" style={{ padding: '10px 18px', fontSize: 13 }}>
+          <WhatsAppIcon size={14}/> Παραγγελία
+        </a>
+        <button className="nav-mobile-toggle" aria-label="Μενού" onClick={() => setOpen(o => !o)}
+          style={{ background: 'transparent', border: 'none', padding: 8, color: 'inherit' }}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               strokeWidth="1.6" strokeLinecap="round">
+            <line x1="3" y1="7" x2="21" y2="7"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="17" x2="21" y2="17"/>
+          </svg>
+        </button>
+      </div>
+      {/* Mobile drawer */}
+      {open && (
+        <div style={{
+          padding: '12px var(--gutter) 24px',
+          background: onDark ? 'rgba(58,38,36,0.96)' : 'rgba(243,232,211,0.96)',
+          borderTop: '1px solid ' + (onDark ? 'rgba(243,232,211,0.12)' : 'var(--stone-light)'),
+          display: 'flex', flexDirection: 'column', gap: 4
+        }}>
+          {links.map(l => (
+            <a key={l.id} href="#" onClick={(e) => { e.preventDefault(); onNavigate(l.id); setOpen(false); }}
+               style={{
+                 fontSize: 18, padding: '14px 0',
+                 fontFamily: 'var(--font-display)',
+                 fontWeight: currentPage === l.id ? 500 : 400,
+                 color: currentPage === l.id ? 'var(--accent)' : 'inherit',
+                 textDecoration: 'none', borderBottom: '1px solid ' + (onDark ? 'rgba(243,232,211,0.1)' : 'var(--stone-light)')
+               }}>{l.label}</a>
+          ))}
+        </div>
+      )}
+    </header>
+  );
+}
+
+function Footer({ onNavigate }) {
+  return (
+    <footer style={{
+      background: 'var(--bg-dark-2)', color: 'var(--bg-dark-ink)',
+      paddingTop: 96, paddingBottom: 48, position: 'relative', overflow: 'hidden'
+    }}>
+      <Container>
+        <div style={{
+          display: 'grid', gap: 'clamp(40px, 5vw, 80px)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', alignItems: 'start'
+        }}>
+          <div>
+            <Wordmark size={28} color="var(--bg-dark-ink)" dotColor="var(--accent)"/>
+            <p style={{
+              marginTop: 24, fontSize: 14, lineHeight: 1.65,
+              color: 'var(--bg-dark-soft)', maxWidth: '34ch'
+            }}>
+              Πατάτες, μπλε πατάτες και φασόλια από τον Άνω Βρόντου Σερρών.
+              Καλλιεργημένα στα 1.100μ από τον Βασίλη Παπαδόπουλο.
+            </p>
+          </div>
+
+          <div>
+            <Eyebrow color="var(--bg-dark-soft)" style={{ marginBottom: 18 }}>Σελίδες</Eyebrow>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 10 }}>
+              {[
+                ['home', 'Αρχική'], ['product', 'Το προϊόν'],
+                ['production', 'Παραγωγή'], ['contact', 'Επικοινωνία']
+              ].map(([id, l]) => (
+                <li key={id}>
+                  <a href="#" className="ul-link" style={{
+                    fontSize: 14, color: 'var(--bg-dark-ink)', textDecoration: 'none', paddingBottom: 2
+                  }} onClick={(e) => { e.preventDefault(); onNavigate(id); }}>{l}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <Eyebrow color="var(--bg-dark-soft)" style={{ marginBottom: 18 }}>Επικοινωνία</Eyebrow>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 10 }}>
+              <li><a href={CONTACT.phoneHref} className="ul-link" style={{ fontSize: 14, color: 'var(--bg-dark-ink)', textDecoration: 'none', paddingBottom: 2 }}>{CONTACT.phone}</a></li>
+              <li><a href={CONTACT.whatsapp} target="_blank" rel="noopener" className="ul-link" style={{ fontSize: 14, color: 'var(--bg-dark-ink)', textDecoration: 'none', paddingBottom: 2 }}>WhatsApp <ExternalIcon size={11}/></a></li>
+              <li><a href={'mailto:' + CONTACT.email} className="ul-link" style={{ fontSize: 14, color: 'var(--bg-dark-ink)', textDecoration: 'none', paddingBottom: 2 }}>{CONTACT.email}</a></li>
+              <li style={{ fontSize: 14, color: 'var(--bg-dark-soft)', marginTop: 8 }}>{CONTACT.hours}</li>
+            </ul>
+          </div>
+
+          <div>
+            <Eyebrow color="var(--bg-dark-soft)" style={{ marginBottom: 18 }}>Τοποθεσία</Eyebrow>
+            <div style={{ fontSize: 14, color: 'var(--bg-dark-ink)', lineHeight: 1.65 }}>
+              {CONTACT.village}<br/>
+              <span style={{ color: 'var(--bg-dark-soft)' }}>Όρος Μενοίκιο · 1.100m</span>
+            </div>
+            <div style={{ marginTop: 14 }}>
+              <a className="ul-link" href="https://maps.google.com/?q=Άνω+Βρόντου+Σερρών" target="_blank" rel="noopener"
+                 style={{ fontSize: 13, color: 'var(--accent)', textDecoration: 'none', paddingBottom: 2 }}>
+                Άνοιγμα στον χάρτη <ExternalIcon size={11}/>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div style={{
+          marginTop: 72, paddingTop: 24, borderTop: '1px solid rgba(243,232,211,0.14)',
+          display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16,
+          fontSize: 12, color: 'var(--bg-dark-soft)'
+        }}>
+          <span>© {new Date().getFullYear()} anovrountoufarm · Βασίλειος Παπαδόπουλος</span>
+          <span>Βιολογικό προϊόν · 100% Ελληνική παραγωγή</span>
+        </div>
+      </Container>
+    </footer>
+  );
+}
+
+// ============================================================
+// TWEAKS PANEL
+// ============================================================
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "palette": "aubergine",
+  "heroVariant": "illustration",
+  "typeScale": 1
+}/*EDITMODE-END*/;
+
+function TweaksUI() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  return (
+    <TweaksPanel>
+      <TweakSection label="Παλέτα" />
+      <TweakRadio label="Χρώματα" value={t.palette}
+        options={['aubergine', 'coral', 'cream']}
+        onChange={(v) => setTweak('palette', v)} />
+
+      <TweakSection label="Hero" />
+      <TweakRadio label="Variant" value={t.heroVariant}
+        options={['illustration', 'photo']}
+        onChange={(v) => setTweak('heroVariant', v)} />
+
+      <TweakSection label="Typography" />
+      <TweakSlider label="Μέγεθος" value={Math.round(t.typeScale * 100)}
+        min={90} max={115} step={1} unit="%"
+        onChange={(v) => setTweak('typeScale', v / 100)} />
+    </TweaksPanel>
+  );
+}
+
+// ============================================================
+// APP ROUTER
+// ============================================================
+function App() {
+  // Mirror tweak state by listening to the `tweakchange` CustomEvent that
+  // useTweaks dispatches on every setTweak call.
+  const [tweaks, setTweaks] = useState(TWEAK_DEFAULTS);
+  useEffect(() => {
+    const handler = (e) => setTweaks((prev) => ({ ...prev, ...(e.detail || {}) }));
+    window.addEventListener('tweakchange', handler);
+    return () => window.removeEventListener('tweakchange', handler);
+  }, []);
+
+  // Apply palette + typeScale to :root
+  useEffect(() => {
+    document.documentElement.dataset.palette = tweaks.palette || 'aubergine';
+    document.documentElement.style.setProperty('--type-scale', tweaks.typeScale || 1);
+  }, [tweaks.palette, tweaks.typeScale]);
+
+  const [page, setPage] = useState(() => {
+    try { return localStorage.getItem('avf_page') || 'home'; } catch { return 'home'; }
+  });
+  useEffect(() => { try { localStorage.setItem('avf_page', page); } catch {} }, [page]);
+
+  const nav = (id) => {
+    setPage(id);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
+  return (
+    <div data-screen-label={page}>
+      <Nav currentPage={page} onNavigate={nav} palette={tweaks.palette}/>
+      {page === 'home' && (
+        <>
+          <Hero onNavigate={nav} heroVariant={tweaks.heroVariant}/>
+          <Marquee/>
+          <IntroBlock onNavigate={nav}/>
+          <ValueProps/>
+          <FeaturedShowcase onNavigate={nav}/>
+          <QuoteBlock/>
+          <OrderCTA/>
+        </>
+      )}
+      {page === 'product' && (
+        <>
+          <ProductHeader/>
+          <ProductPhoto/>
+          <WhyBio/>
+          <Varieties/>
+          <Certifications/>
+          <Packaging/>
+          <OrderCTA/>
+        </>
+      )}
+      {page === 'production' && (
+        <>
+          <ProductionHeader/>
+          <ProductionPhoto/>
+          <StoryBlock/>
+          <YearCycle/>
+          <ProducerProfile/>
+          <OrderCTA/>
+        </>
+      )}
+      {page === 'contact' && <ContactPage/>}
+      <Footer onNavigate={nav}/>
+      <TweaksUI/>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+
+  </script>
+</body>
+</html>
